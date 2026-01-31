@@ -1,10 +1,12 @@
+// Path: ANVL-main/edge/src/services/dataSender.ts
 import { config } from '../config/config';
 import * as https from 'https';
 import * as http from 'http';
 import { URL } from 'url';
+import { DetectionEvent } from '@anvl/shared/types/events';
 
 // Send detection event to central hub
-export async function sendToCentralHub(detectionEvent: any): Promise<void> {
+export async function sendToCentralHub(detectionEvent: DetectionEvent): Promise<void> {
   const hubUrl = config.central_hub.url;
   const apiKey = config.central_hub.api_key;
   
@@ -61,7 +63,7 @@ export async function sendToCentralHub(detectionEvent: any): Promise<void> {
 }
 
 // Buffer data for offline mode
-export async function bufferData(detectionEvent: any): Promise<void> {
+export async function bufferData(detectionEvent: DetectionEvent): Promise<void> {
   // In production, this would store data locally in a buffer
   // For now, we'll just log it
   console.log(`Buffering detection event for offline storage: ${detectionEvent.detection_id}`);

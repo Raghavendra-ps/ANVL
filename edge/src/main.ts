@@ -1,14 +1,14 @@
+// Path: ANVL-main/edge/src/main.ts
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
 import { spawn } from 'child_process';
-import { detectVehicles } from './services/vehicleDetection';
-import { extractLicensePlates } from './services/licensePlateExtraction';
-import { inferVehicleAttributes } from './services/vehicleAttributes';
+import { detectVehicles, extractLicensePlates, inferVehicleAttributes } from './services/inferenceClient';
 import { sendToCentralHub } from './services/dataSender';
 import { Buffer } from 'buffer';
 import { v4 as uuidv4 } from 'uuid';
 import { config } from './config/config';
+import { DetectionEvent } from '@anvl/shared/types/events';
 
 // Create logs directory if it doesn't exist
 const logDir = path.dirname(config.logging.file);
@@ -68,11 +68,11 @@ async function detectionLoop() {
           const attributes = await inferVehicleAttributes(croppedVehicle);
           
           // Create detection event
-          const detectionEvent = {
+          const detectionEvent: DetectionEvent = {
             detection_id: uuidv4(),
             timestamp: new Date().toISOString(),
             toll_booth_id: config.toll_booth_id,
-            camera_id: detection.camera_id,
+            camera_id: detection.camera_id || config.camera_ids[0], // Use a default camera_id
             vehicle_type: detection.vehicle_type,
             license_plate_text: plateResult?.text || null,
             license_plate_confidence: plateResult?.confidence || null,

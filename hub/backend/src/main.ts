@@ -1,8 +1,10 @@
+// Path: ANVL-main/hub/backend/src/main.ts
 import * as express from 'express';
 import * as http from 'http';
 import { config } from './config/config';
 import { testConnection } from './config/database';
 import { Vehicle } from './models/vehicle';
+import { DetectionEvent } from '@anvl/shared/types/events';
 
 // Create Express app
 const app = express();
@@ -25,10 +27,15 @@ app.get('/health', (req, res) => {
 app.post('/api/detections', async (req, res) => {
   try {
     // In a real implementation, this would validate and store the detection
-    const detection = req.body;
+    const detection: DetectionEvent = req.body;
     
-    // Here we would validate the detection data and save to database
-    // For now, we'll just return a success response
+    // Here we would validate the detection data against a schema
+    // and then save it to the database using the Vehicle model.
+    console.log('Received detection:', detection.detection_id);
+
+    // Example of saving (in a real app, this logic would be in a service layer):
+    // await Vehicle.create({ ...detection, timestamp: new Date(detection.timestamp) });
+    
     res.status(201).json({
       message: 'Detection received successfully',
       detection_id: detection.detection_id || 'generated-id',

@@ -21,6 +21,11 @@ export const config = {
     level: process.env.LOG_LEVEL || 'info'
   },
   
+  // Inference pipeline configuration
+  inference_pipeline: {
+    url: process.env.INFERENCE_PIPELINE_URL || 'http://localhost:8082'
+  },
+  
   // Network configuration
   network: {
     buffer_size: parseInt(process.env.BUFFER_SIZE || '10', 10),
