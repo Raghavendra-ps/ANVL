@@ -1,0 +1,30 @@
+{
+  "name": "anvl-edge-node",
+  "version": "1.0.0",
+  "description": "ANVL Edge Node Service for vehicle detection and recognition at toll booths",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "ts-node src/main.ts",
+    "test": "jest"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@types/uuid": "^9.0.0"
+  },
+  "keywords": [
+    "anvl",
+    "edge-node",
+    "vehicle-detection",
+    "toll-booth",
+    "computer-vision"
+  ],
+  "author": "ANVL Team",
+  "license": "MIT"
+}

@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  edge-node:
+    build: .
+    container_name: anvl-edge-node
+    ports:
+      - "8081:8081"
+    environment:
+      - TOLL_BOOTH_ID=1
+      - CAMERA_IDS=main_camera,secondary_camera
+      - FPS=5
+      - DETECTION_INTERVAL=10
+      - OCR_THRESHOLD=0.8
+      - LOG_FILE=/var/log/anvil/edge.log
+      - CENTRAL_HUB_URL=http://hub:8083
+      - CENTRAL_HUB_API_KEY=your-api-key-here
+      - OFFLINE_MODE=true
+      - BUFFER_SIZE=10
+    volumes:
+      - ./logs:/var/log/anvil
+      - ./buffer:/tmp/anvil_buffer
+    networks:
+      - anvl-network
+    restart: unless-stopped
+
+networks:
+  anvl-network:
+    driver: bridge

@@ -1,0 +1,31 @@
+{
+  "name": "anvl-inference-pipeline",
+  "version": "1.0.0",
+  "description": "ANVL Inference Pipeline for computer vision operations",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "ts-node src/main.ts",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.11.18"
+  },
+  "keywords": [
+    "anvl",
+    "inference",
+    "computer-vision",
+    "vehicle-detection",
+    "ocr",
+    "ml-pipeline"
+  ],
+  "author": "ANVL Team",
+  "license": "MIT"
+}
