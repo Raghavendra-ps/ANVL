@@ -1,0 +1,13 @@
+toll_booth_id: 1
+camera_ids:
+  - main_camera
+  - secondary_camera
+fps: 5
+detection_interval: 10
+ocr_threshold: 0.8
+logging:
+  file: /var/log/anvil/edge.log
+  level: info
+network:
+  buffer_size: 10
+  offline_mode: true

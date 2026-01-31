@@ -1,0 +1,47 @@
+database:
+  type: postgres
+  host: db
+  port: 5432
+  name: anvil_db
+  user: anvil_user
+  password: anvil_password
+  
+services:
+  edge_node:
+    image: edge_node:latest
+    ports:
+      8081/tcp: 8081
+    environment:
+      - EDGE_CONFIG=/etc/anvil/edge_config.yaml
+    
+  inference_pipeline:
+    image: inference_pipeline:latest
+    ports:
+      8082/tcp: 8082
+    environment:
+      - INFERENCE_API_KEY=your_api_key_here
+    
+  central_hub:
+    image: central_hub:latest
+    ports:
+      8083/tcp: 8083
+    environment:
+      - HUB_ADMIN_PASSWORD=admin_password
+      
+ui:
+  frontend: next.js
+  backend: express
+  
+ports:
+  edge_node_http: "8081"
+  inference_api: "8082"
+  central_hub_api: "8083"
+  
+logging:
+  driver: file
+  path: /var/log/anvil/
+  max_size: 1MB
+  
+monitoring:
+  enabled: true
+  type: prometheus
